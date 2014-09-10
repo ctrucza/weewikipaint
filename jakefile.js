@@ -1,13 +1,8 @@
-task("default", [], function(){
-   console.log("default");
+task("default", ["lint"]);
+
+desc("Lint everything");
+task("lint", [], function(){
+    var lint = require("./build/lint/lint_runner.js");
+    lint.validateFile("jakefile.js", {}, {});
 });
 
-
-desc("Example!");
-task("example", ["dependency"], function(){
-   console.log("example taks");
-});
-
-task("dependency", function(){
-   console.log("dependency");
-});
