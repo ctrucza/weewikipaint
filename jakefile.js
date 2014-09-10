@@ -10,7 +10,6 @@ task("lint", [], function(){
     var files = new jake.FileList();
     files.include("**/*.js");
     files.exclude("node_modules");
-    //files.exclude("build");
 
     var options = {
         node: true
