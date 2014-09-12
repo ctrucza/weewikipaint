@@ -2,6 +2,7 @@
 (function() {
     "use strict";
 
+    desc("Build and test");
     task("default", ["lint"]);
 
     desc("Lint everything");
@@ -12,6 +13,17 @@
         files.include("**/*.js");
         files.exclude("node_modules");
         lint.validateFileList(files.toArray(), nodeLintOptions(), {});
+    });
+
+    desc("Integrate");
+    task("integrate", ["default"], function(){
+        console.log("1. make sure 'git status' is clean");
+        console.log("2. Build on integration machine");
+        console.log("   a. 'git pull'");
+        console.log("   b. 'jake'");
+        console.log("3. git checkout integration");
+        console.log("4, git merge master --no-ff --log");
+        console.log("5. git checkout master");
     });
 
     function nodeLintOptions() {
