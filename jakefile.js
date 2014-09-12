@@ -21,6 +21,7 @@
         console.log("2. Build on integration machine");
         console.log("   a. 'git pull'");
         console.log("   b. 'jake'");
+        console.log("   c. if jake fails, stop!");
         console.log("3. git checkout integration");
         console.log("4, git merge master --no-ff --log");
         console.log("5. git checkout master");
