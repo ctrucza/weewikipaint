@@ -18,6 +18,7 @@ Engineering Tasks:
 - client side testing
 
 Todo on current task:
-- pick a testing framework
-- abstract it away
-- swap it out with another to see that the abstraction works as expected
+
+
+Future ideas:
+- abstract test framework away. Swap it out with another to see that the abstraction works as expected
