@@ -3,7 +3,7 @@
     "use strict";
 
     desc("Build and test");
-    task("default", ["lint"]);
+    task("default", ["lint", "test"]);
 
     desc("Lint everything");
     task("lint", [], function(){
@@ -15,6 +15,12 @@
         var passed = lint.validateFileList(files.toArray(), nodeLintOptions(), {});
         if (!passed)
             fail("Lint failed");
+    });
+
+    desc("Test everything");
+    task("test", [], function(){
+        var reporter = require("nodeunit").reporters["default"];
+        reporter.run(["src/server/_server_test.js"]);
     });
 
     desc("Integrate");
