@@ -1,1 +1,6 @@
-console.log("Hello World!");
+"use strict";
+
+exports.number = function()
+{
+    return 3;
+};
