@@ -1,3 +1,5 @@
+"use strict";
+
 var http = require("http");
 
 var server = http.createServer();
@@ -10,4 +12,4 @@ server.on("request", function(request, response){
 });
 
 server.listen(8080);
-console.log("Server started")
+console.log("Server started");
