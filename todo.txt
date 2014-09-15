@@ -14,7 +14,7 @@ User Stories:
 - marketing copy
 
 Engineering Tasks:
-- server side testing
+- create a simple HTTP server
 - client side testing
 
 Todo on current task:
