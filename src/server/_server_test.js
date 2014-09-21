@@ -9,7 +9,7 @@ exports.tearDown = function(callback){
 };
 
 exports.test_ServerReturnsHelloWorld = function(test){
-    server.start();
+    server.start(8080);
 
     var request = http.get("http://localhost:8080");
     request.on("response", function(response){
