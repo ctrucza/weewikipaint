@@ -13,6 +13,6 @@ exports.start = function(portNumber){
     server.listen(portNumber);
 };
 
-exports.stop = function(){
-    server.close();
+exports.stop = function(callback){
+    server.close(callback);
 };
