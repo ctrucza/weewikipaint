@@ -8,16 +8,13 @@ Minimum Marketing Feature:
 - collaborative painting wiki
 
 User Stories:
-- "Hello World" server
 - "Hello World" client
 - support multiple browsers
 - marketing copy
 
 Engineering Tasks:
-- create a simple HTTP server
 
 Todo on current task:
-- configure port
 
 Future ideas:
 - abstract test framework away. Swap it out with another to see that the abstraction works as expected
