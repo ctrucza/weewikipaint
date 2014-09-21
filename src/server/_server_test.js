@@ -16,3 +16,23 @@ exports.testServerRespondsToGetRequests = function(test){
         test.done();
     });
 };
+
+exports.test_ServerReturnsHelloWorld = function(test){
+    server.start();
+
+    var request = http.get("http://localhost:8080");
+    request.on("response", function(response){
+        response.setEncoding("utf8");
+        var responseReceived = false;
+
+        test.equals(200, response.statusCode);
+        response.on("data", function(chunk){
+            test.equals("Hello World", chunk, "expected Hello World!");
+            responseReceived = true;
+        });
+        response.on("end", function(){
+            test.ok(responseReceived, "should have received data");
+            test.done();
+        });
+    });
+};
