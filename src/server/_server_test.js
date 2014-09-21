@@ -8,15 +8,6 @@ exports.tearDown = function(callback){
     callback();
 };
 
-exports.testServerRespondsToGetRequests = function(test){
-    server.start();
-
-    http.get("http://localhost:8080", function(response){
-        response.on("data", function(){});
-        test.done();
-    });
-};
-
 exports.test_ServerReturnsHelloWorld = function(test){
     server.start();
 

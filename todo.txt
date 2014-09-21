@@ -15,10 +15,9 @@ User Stories:
 
 Engineering Tasks:
 - create a simple HTTP server
-- client side testing
 
 Todo on current task:
-
+- configure port
 
 Future ideas:
 - abstract test framework away. Swap it out with another to see that the abstraction works as expected
