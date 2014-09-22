@@ -42,10 +42,10 @@
 
 //    desc("Ensure correct version of node is present");
     task("node", [], function(){
-        var desiredNodeVersion = "v0.10.31\n";
+        var desiredNodeVersion = "v0.10.31";
 
         sh("node --version", function(stdout){
-            if(stdout !== desiredNodeVersion) fail("Incorrect node version. " + stdout + "Expected " + desiredNodeVersion);
+            if(stdout.trim() !== desiredNodeVersion) fail("Incorrect node version. " + stdout + "Expected " + desiredNodeVersion);
             complete();
         });
     }, {async:true});
