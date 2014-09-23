@@ -8,13 +8,12 @@ Minimum Marketing Feature:
 - collaborative painting wiki
 
 User Stories:
-* "Hello World" server
-- "Hello World" client
-- support multiple browsers
+* serve a file
+- serve 404 for everything else
 - marketing copy
+- publish to internet
 
 Engineering Tasks:
-- serve a file
 
 Todo on current task:
 
