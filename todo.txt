@@ -14,6 +14,8 @@ User Stories:
 - publish to internet
 
 Engineering Tasks:
+* spike serving a file
+- tdd file serving
 
 Todo on current task:
 
