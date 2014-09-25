@@ -8,14 +8,12 @@ Minimum Marketing Feature:
 - collaborative painting wiki
 
 User Stories:
-* serve a file
-- serve 404 for everything else
+* serve 404 for everything else
+- custom 404 page
 - marketing copy
 - publish to internet
 
 Engineering Tasks:
-* spike serving a file
-- tdd file serving
 
 Todo on current task:
 
