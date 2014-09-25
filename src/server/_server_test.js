@@ -6,7 +6,7 @@ var fs = require("fs");
 
 var TEST_FILE = "generated/test/test.html";
 
-exports.test_ServerServesAFile = function(test){
+exports.test_serverServesAFile = function(test){
     var testData = "This is served from a static file";
 
     fs.writeFileSync(TEST_FILE, testData);
@@ -41,21 +41,21 @@ exports.test_serverNeedsFileToServe = function(test){
     test.done();
 };
 
-exports.test_ServerRequiresPortNumber = function(test){
+exports.test_serverRequiresPortNumber = function(test){
     test.throws(function(){
         server.start(TEST_FILE);
     });
     test.done();
 };
 
-exports.test_ServerRunsCallbackWhenStopped = function(test){
+exports.test_serverRunsCallbackWhenStopped = function(test){
     server.start(TEST_FILE, 8080);
     server.stop(function(){
         test.done();
     });
 };
 
-exports.test_CallingStopWhileServerNotRunningThrows = function(test){
+exports.test_callingStopWhileServerNotRunningThrows = function(test){
     test.throws(function(){
         server.stop();
     });
