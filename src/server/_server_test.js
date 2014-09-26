@@ -16,14 +16,12 @@
     };
 
     exports.tearDown = function(done){
-        if (fs.existsSync(TEST_FILE)){
-            fs.unlinkSync(TEST_FILE);
-            assert.ok(!fs.existsSync(TEST_FILE));
-        }
+        fs.unlinkSync(TEST_FILE);
+        assert.ok(!fs.existsSync(TEST_FILE));
         done();
     };
 
-    exports.test_serverServesHomePageFromFile = function(test){
+    exports.serves_home_page_from_file = function(test){
         httpGet("http://localhost:8080", function(response, responseData){
             test.equals(200, response.statusCode);
             test.equals(TEST_DATA, responseData, "expected Hello World!");
@@ -31,7 +29,7 @@
         });
     };
 
-    exports.test_serverReturnsHomePageWhenAskedForIndex = function(test){
+    exports.returns_home_page_when_asked_for_index = function(test){
         httpGet("http://localhost:8080/index.html", function(response, responseData){
             test.equals(200, response.statusCode);
             test.equals(TEST_DATA, responseData, "expected Hello World!");
@@ -39,11 +37,39 @@
         });
     };
 
-    exports.test_serverReturns404ForEverythingExceptHomePage = function(test){
+    exports.returns_404_for_everything_except_home_page = function(test){
         httpGet("http://localhost:8080/noSuchPage", function(response, responseData){
             test.equals(404, response.statusCode);
             test.done();
         });
+    };
+
+    exports.requires_file_to_serve = function(test){
+        test.throws(function(){
+            server.start();
+        });
+        test.done();
+    };
+
+    exports.requires_port_number = function(test){
+        test.throws(function(){
+            server.start(TEST_FILE);
+        });
+        test.done();
+    };
+
+    exports.stop_runs_callback = function(test){
+        server.start(TEST_FILE, 8080);
+        server.stop(function(){
+            test.done();
+        });
+    };
+
+    exports.stop_throws_if_not_running = function(test){
+        test.throws(function(){
+            server.stop();
+        });
+        test.done();
     };
 
     function httpGet(url, callback)
@@ -64,32 +90,4 @@
             });
         });
     }
-
-    exports.test_serverNeedsFileToServe = function(test){
-        test.throws(function(){
-            server.start();
-        });
-        test.done();
-    };
-
-    exports.test_serverRequiresPortNumber = function(test){
-        test.throws(function(){
-            server.start(TEST_FILE);
-        });
-        test.done();
-    };
-
-    exports.test_serverRunsCallbackWhenStopped = function(test){
-        server.start(TEST_FILE, 8080);
-        server.stop(function(){
-            test.done();
-        });
-    };
-
-    exports.test_callingStopWhileServerNotRunningThrows = function(test){
-        test.throws(function(){
-            server.stop();
-        });
-        test.done();
-    };
 }());
