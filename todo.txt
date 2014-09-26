@@ -8,17 +8,14 @@ Minimum Marketing Feature:
 - collaborative painting wiki
 
 User Stories:
-- "Hello World" server
-- "Hello World" client
-- support multiple browsers
+* serve 404 for everything else
+- custom 404 page
 - marketing copy
+- publish to internet
 
 Engineering Tasks:
-- create a simple HTTP server
-- client side testing
 
 Todo on current task:
-
 
 Future ideas:
 - abstract test framework away. Swap it out with another to see that the abstraction works as expected

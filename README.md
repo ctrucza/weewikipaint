@@ -8,5 +8,6 @@ To build on windows:
 - run `jake.bat`
 
 To build:
-- needs node.js
+- needs node.js (v0.10.31)
+- git (1.9.3)
 - run `./jake.sh`

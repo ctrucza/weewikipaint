@@ -1,12 +1,22 @@
-/*global desc, task, jake, fail, complete */
+/*global desc, task, jake, fail, complete, directory */
 (function() {
     "use strict";
+
+    var GENERATED_DIR = "generated";
+    var TEMP_TESTFILE_DIR = GENERATED_DIR + "/test";
+
+    directory(TEMP_TESTFILE_DIR);
+
+    desc("clean generated files");
+    task("clean", [], function(){
+       jake.rmRf(GENERATED_DIR);
+    });
 
     desc("Build and test");
     task("default", ["lint", "test"]);
 
     desc("Lint everything");
-    task("lint", [], function(){
+    task("lint", ["node"], function(){
         var lint = require("./build/lint/lint_runner.js");
 
         var files = new jake.FileList();
@@ -18,7 +28,7 @@
     });
 
     desc("Test everything");
-    task("test", [], function(){
+    task("test", ["node", TEMP_TESTFILE_DIR], function(){
         var reporter = require("nodeunit").reporters["default"];
         reporter.run(["src/server/_server_test.js"], null, function(failures){
             if (failures)
@@ -39,6 +49,34 @@
         console.log("5. git push");
         console.log("6. git checkout master");
     });
+
+//    desc("Ensure correct version of node is present");
+    task("node", [], function(){
+        var desiredNodeVersion = "v0.10.31";
+
+        sh("node --version", function(stdout){
+            if(stdout.trim() !== desiredNodeVersion) fail("Incorrect node version. " + stdout + "Expected " + desiredNodeVersion);
+            complete();
+        });
+    }, {async:true});
+
+    function sh(command, callback){
+        //console.log("> " + command);
+
+        var stdout = "";
+        var process = jake.createExec(command, {printStdout:true, printStderr:true});
+        process.on("stdout", function(chunk){
+                stdout += chunk;
+        });
+        process.on("cmdEnd", function(){
+            callback(stdout);
+        });
+        process.run();
+    }
+
+//        jake.exec(command, function(){
+//            complete();
+//        }, {printStdout:true, printStderr:true});
 
     function nodeLintOptions() {
         return {
