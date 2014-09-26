@@ -8,9 +8,14 @@
     var assert = require("assert");
 
     var TEST_FILE = "generated/test/test.html";
+    var TEST_DATA = "This is served from a static file";
 
-    exports.tearDown = function(done)
-    {
+    exports.setUp = function(done){
+        fs.writeFileSync(TEST_FILE, TEST_DATA);
+        done();
+    };
+
+    exports.tearDown = function(done){
         if (fs.existsSync(TEST_FILE)){
             fs.unlinkSync(TEST_FILE);
             assert.ok(!fs.existsSync(TEST_FILE));
@@ -19,25 +24,17 @@
     };
 
     exports.test_serverServesHomePageFromFile = function(test){
-        var testData = "This is served from a static file";
-
-        fs.writeFileSync(TEST_FILE, testData);
-
         httpGet("http://localhost:8080", function(response, responseData){
             test.equals(200, response.statusCode);
-            test.equals(testData, responseData, "expected Hello World!");
+            test.equals(TEST_DATA, responseData, "expected Hello World!");
             test.done();
         });
     };
 
     exports.test_serverReturnsHomePageWhenAskedForIndex = function(test){
-        var testData = "This is served from a static file";
-
-        fs.writeFileSync(TEST_FILE, testData);
-
         httpGet("http://localhost:8080/index.html", function(response, responseData){
             test.equals(200, response.statusCode);
-            test.equals(testData, responseData, "expected Hello World!");
+            test.equals(TEST_DATA, responseData, "expected Hello World!");
             test.done();
         });
     };
