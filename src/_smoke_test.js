@@ -17,14 +17,15 @@
 
     function runServer(callback){
         var child = child_process.spawn("node", ["src/server/weewikipaint", "8080"]);
-        child.stderr.on("data", function(chunk){
-            console.log("server stderr: " + chunk);
-        });
+        child.stdout.setEncoding("utf8");
         child.stdout.on("data", function(chunk){
             console.log("server stdout: " + chunk);
-//            if (chunk === "Server started"){
+            if (chunk.trim() === "Server started"){
                 callback();
-//            }
+            }
+        });
+        child.stderr.on("data", function(chunk){
+            console.log("server stderr: " + chunk);
         });
     }
 
