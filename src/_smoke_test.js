@@ -5,15 +5,15 @@
     var child_process = require("child_process");
     var http = require("http");
 
-//    exports.smoke = function(test){
-//        runServer(function(){
-//            console.log("server up");
-//            httpGet("http://localhost:8080", function(){
-//                console.log("got page");
-//                test.done();
-//            });
-//        });
-//    };
+    exports.smoke = function(test){
+        runServer(function(){
+            console.log("server up");
+            httpGet("http://localhost:8080", function(){
+                console.log("got page");
+                test.done();
+            });
+        });
+    };
 
     function runServer(callback){
         var child = child_process.spawn("node", ["src/server/weewikipaint", "8080"]);
