@@ -5,7 +5,7 @@
     var fs = require("fs");
     var server;
 
-    exports.start = function(homePage, notFoundPage, portNumber){
+    exports.start = function(homePage, notFoundPage, portNumber, callback){
         if (!homePage) throw new Error("Home page is required");
         if (!notFoundPage) throw new Error("404 page is required");
         if (!portNumber) throw new Error("Port number is required");
@@ -25,7 +25,7 @@
             }
         });
 
-        server.listen(portNumber);
+        server.listen(portNumber, callback);
     };
 
     function serveFile(response, file){
