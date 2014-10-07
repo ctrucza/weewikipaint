@@ -6,23 +6,25 @@
     var http = require("http");
 
     exports.smoke = function(test){
-        var command = ["src/server/weewikipaint", "8080"];
-        runServer(command);
-        setTimeout(function(response, responseData){
+        runServer(function(){
             console.log("server up");
             httpGet("http://localhost:8080", function(){
                 console.log("got page");
                 test.done();
             });
-        }, 1000);
+        });
     };
 
-    function runServer(nodeArgs){
-        console.log("starting server");
-        var process = child_process.spawn("node", nodeArgs);
-        console.log("server started");
-        process.stderr.on("data", function(chunk){
+    function runServer(callback){
+        var child = child_process.spawn("node", ["src/server/weewikipaint", "8080"]);
+        child.stderr.on("data", function(chunk){
             console.log("server stderr: " + chunk);
+        });
+        child.stdout.on("data", function(chunk){
+            console.log("server stdout: " + chunk);
+//            if (chunk === "Server started"){
+                callback();
+//            }
         });
     }
 
