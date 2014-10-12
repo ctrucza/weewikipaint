@@ -18,7 +18,7 @@
     };
 
     exports.can_get_homepage = function(test){
-        httpGet("http://localhost:8080", function(response, responseData){
+        httpGet("http://localhost:8081", function(response, responseData){
             var homepageMarkerFound = (responseData.indexOf("WeeWikiPaint homepage") !== -1);
             test.ok(homepageMarkerFound, "homepage should contain WeeWikiPaint marker");
             test.done();
@@ -26,7 +26,7 @@
     };
 
     function runServer(callback){
-        child = child_process.spawn("node", ["src/server/weewikipaint", "8080"]);
+        child = child_process.spawn("node", ["src/server/weewikipaint", "8081"]);
         child.stdout.setEncoding("utf8");
         child.stdout.on("data", function(chunk){
             if (chunk.trim() === "Server started"){
