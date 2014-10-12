@@ -85,18 +85,19 @@
 
     function httpGet(url, callback)
     {
-        server.start(TEST_HOME_PAGE, TEST_404_PAGE, 8080);
-        var request = http.get(url);
-        var responseData = "";
-        request.on("response", function(response){
-            response.setEncoding("utf8");
+        server.start(TEST_HOME_PAGE, TEST_404_PAGE, 8080, function(){
+            var request = http.get(url);
+            var responseData = "";
+            request.on("response", function(response){
+                response.setEncoding("utf8");
 
-            response.on("data", function(chunk){
-                responseData += chunk;
-            });
-            response.on("end", function(){
-                server.stop(function(){
-                    callback(response, responseData);
+                response.on("data", function(chunk){
+                    responseData += chunk;
+                });
+                response.on("end", function(){
+                    server.stop(function(){
+                        callback(response, responseData);
+                    });
                 });
             });
         });

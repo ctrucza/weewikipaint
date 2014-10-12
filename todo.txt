@@ -8,12 +8,13 @@ Minimum Marketing Feature:
 - collaborative painting wiki
 
 User Stories:
-* serve 404 for everything else
-- custom 404 page
+* publish to internet
 - marketing copy
-- publish to internet
 
 Engineering Tasks:
+- standalone server
+- end-to-end integration test
+- server lunch code
 
 Todo on current task:
 
